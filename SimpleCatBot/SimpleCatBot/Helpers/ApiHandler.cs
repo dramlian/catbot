@@ -3,18 +3,13 @@ using System.Text.Json;
 
 namespace SimpleCatBot.Helpers
 {
-    public class ApiHandler : IDisposable
+    public class ApiHandler
     {
         private readonly HttpClient _httpClient;
 
         public ApiHandler()
         {
             _httpClient = new HttpClient();
-        }
-
-        public void Dispose()
-        {
-            _httpClient.Dispose();
         }
 
         public async Task<T?> GetAsync<T>(string url)
@@ -32,7 +27,6 @@ namespace SimpleCatBot.Helpers
                 return default;
             }
         }
-
         public async Task<TResponse?> PostAsync<TRequest, TResponse>(string url, TRequest content)
         {
             try

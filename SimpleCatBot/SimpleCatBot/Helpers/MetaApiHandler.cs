@@ -18,13 +18,13 @@
             _pageAccessToken = pageAccessToken;
         }
 
-        public async Task<MessageData> GetMessages(string recipientTargetId)
+        public async Task<MessageData> GetMessages()
         {
             Data? recipientData = (await GetAsync<CurrentMetaChats>($"{_metaUrl}/{_pageId}/" +
             "conversations?fields=participants,messages{id,message}" +
             $"&access_token={_pageAccessToken}"))?.data?.Where
             (x=> x?.participants?.data!=null
-            && x.participants.data.Any(y=>y.id==recipientTargetId))
+            && x.participants.data.Any(y=>y.id== _recipientId))
             .FirstOrDefault();
 
             ArgumentNullException.ThrowIfNull(recipientData?.messages?.data);
