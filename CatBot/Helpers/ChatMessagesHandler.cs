@@ -5,7 +5,7 @@ namespace SimpleCatBot.Helpers
 {
     internal class ChatMessagesHandler
     {
-        private MetaApiHandler _handler {  get; set; }
+        private MetaApiHandler _handler { get; set; }
 
         public ChatMessagesHandler(MetaApiHandler handler)
         {
@@ -14,14 +14,10 @@ namespace SimpleCatBot.Helpers
 
         public async Task ListenToChatAndReact()
         {
-            while (true)
+            var newestMessage = await _handler.GetMessages();
+            if (newestMessage.message != null && newestMessage.message.ToLower().Contains("maciatko"))
             {
-                var newestMessage = await _handler.GetMessages();
-                if (newestMessage.message != null && newestMessage.message.ToLower().Contains("maciatko"))
-                {
-                    await SendCatImageIterationTimes(DecideNumberOfIterations(newestMessage.message));
-                }
-                Thread.Sleep(TimeSpan.FromSeconds(30));
+                await SendCatImageIterationTimes(DecideNumberOfIterations(newestMessage.message));
             }
         }
 
@@ -45,7 +41,7 @@ namespace SimpleCatBot.Helpers
         public async Task SendCatImageIterationTimes(int numberOfMessages)
         {
             List<Task> tasks = new List<Task>();
-            for(int i = 0; i < numberOfMessages; i++)
+            for (int i = 0; i < numberOfMessages; i++)
             {
                 tasks.Add(Task.Run(async () =>
                 {

@@ -1,5 +1,5 @@
 # CATBOT
-This console app is able to connect to you facebook page and
+This webapi app is able to connect to you facebook page and
 read the contents of your conversations.
 When a keyword is hit (in this example "maciatko") a cat is being
 sent to a recipient from https://cataas.com/.
@@ -14,7 +14,7 @@ and get the following:
 2. Page id
 3. Page auth token
 
-Enter those values in App.config, recipients are comma separated string of IDs
+Enter those values in CatBotService.cs, recipients are comma separated string of IDs
 
 Info about where and how to get the needed IDs
 https://developers.facebook.com/docs/graph-api/get-started/
